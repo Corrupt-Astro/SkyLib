@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkyLibrary Documentation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-900 text-gray-100 font-sans p-6 md:p-12">
+
+    <div class="max-w-4xl mx-auto bg-gray-800 rounded-xl shadow-lg p-8 md:p-12">
+        <header class="mb-8">
+            <h1 class="text-4xl md:text-5xl font-bold text-blue-400 mb-2">SkyLibrary Documentation</h1>
+            <p class="text-gray-400">A guide to using the SkyLibrary UI framework built in Lua.</p>
+        </header>
+
+        <section class="mb-8">
+            <h2 class="text-2xl md:text-3xl font-semibold text-white mb-4 border-b border-gray-700 pb-2">Core Concepts</h2>
+            <p class="mb-4 text-gray-300">
+                SkyLibrary is designed to be a simple and efficient way to create graphical user interfaces. The main components are `Window`, `Tab`, and `Section`, which serve as containers for other UI elements.
+            </p>
+            <ul class="list-none space-y-4">
+                <li>
+                    <strong class="text-blue-300">Window</strong>: The top-level container for your entire UI. All other elements must be placed inside a window.
+                </li>
+                <li>
+                    <strong class="text-blue-300">Tab</strong>: A container for different pages of content within a `Window`.
+                </li>
+                <li>
+                    <strong class="text-blue-300">Section</strong>: A container for groups of related controls within a `Tab`.
+                </li>
+            </ul>
+        </section>
+
+        <section class="mb-8">
+            <h2 class="text-2xl md:text-3xl font-semibold text-white mb-4 border-b border-gray-700 pb-2">Getting Started</h2>
+            <p class="mb-4 text-gray-300">
+                To begin, you must require the SkyLibrary library and call the `Create` function to create a new window.
+            </p>
+            <pre class="bg-gray-700 rounded-lg p-4 text-sm overflow-x-auto"><code>local SkyLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/yofriendfromschool1/aw-temp-fix/refs/heads/main/skui.lua",true))()
+
+local Window = SkyLibrary.Create("My Window", true)
+
+</code></pre>
+            <p class="mt-4 text-gray-300">
+                The `Create` function takes two arguments:
+                <ul class="list-disc list-inside mt-2 space-y-1">
+                    <li><strong class="text-blue-300">Title</strong> (string): The title of your window.</li>
+                    <li><strong class="text-blue-300">Toggleable</strong> (boolean, optional): If `true`, the window can be toggled on/off with a keybind. The default keybind is `RightControl`.</li>
+                </ul>
+            </p>
+        </section>
+
+        <section class="mb-8">
+            <h2 class="text-2xl md:text-3xl font-semibold text-white mb-4 border-b border-gray-700 pb-2">Window Methods</h2>
+            <p class="mb-4 text-gray-300">
+                Once you have created a window, you can add tabs to it.
+            </p>
+            <div class="bg-gray-700 p-4 rounded-lg">
+                <h3 class="font-medium text-lg text-blue-300 mb-2">`Window:CreateTab(name)`</h3>
+                <ul class="list-disc list-inside space-y-1">
+                    <li>Creates a new tab within the window.</li>
+                    <li><strong class="text-blue-300">`name`</strong> (string): The name of the tab that will appear on the UI.</li>
+                    <li><strong class="text-blue-300">Returns</strong>: The newly created `Tab` object.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="mb-8">
+            <h2 class="text-2xl md:text-3xl font-semibold text-white mb-4 border-b border-gray-700 pb-2">Tab Methods</h2>
+            <p class="mb-4 text-gray-300">
+                Tabs are where you organize your content. Tabs can contain sections.
+            </p>
+            <div class="bg-gray-700 p-4 rounded-lg">
+                <h3 class="font-medium text-lg text-blue-300 mb-2">`Tab:CreateSection(name, width)`</h3>
+                <ul class="list-disc list-inside space-y-1">
+                    <li>Creates a new section within the tab.</li>
+                    <li><strong class="text-blue-300">`name`</strong> (string): The title of the section.</li>
+                    <li><strong class="text-blue-300">`width`</strong> (number, optional): The width of the section. Default is `400`.</li>
+                    <li><strong class="text-blue-300">Returns</strong>: The newly created `Section` object.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="mb-8">
+            <h2 class="text-2xl md:text-3xl font-semibold text-white mb-4 border-b border-gray-700 pb-2">Section Methods</h2>
+            <p class="mb-4 text-gray-300">
+                Sections hold the actual interactive UI elements. This is where you can add buttons, toggles, sliders, and more.
+            </p>
+            <div class="bg-gray-700 p-4 rounded-lg space-y-4">
+                <div>
+                    <h3 class="font-medium text-lg text-blue-300 mb-2">`Section:CreateButton(name, callback, tooltip)`</h3>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li>Creates a clickable button.</li>
+                        <li><strong class="text-blue-300">`name`</strong> (string): The text displayed on the button.</li>
+                        <li><strong class="text-blue-300">`callback`</strong> (function): A function to be executed when the button is clicked.</li>
+                        <li><strong class="text-blue-300">`tooltip`</strong> (string, optional): A description that appears on hover.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-medium text-lg text-blue-300 mb-2">`Section:CreateToggle(name, default, callback, tooltip)`</h3>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li>Creates a toggle switch (checkbox).</li>
+                        <li><strong class="text-blue-300">`name`</strong> (string): The text next to the toggle.</li>
+                        <li><strong class="text-blue-300">`default`</strong> (boolean): The initial state of the toggle (`true` for on, `false` for off).</li>
+                        <li><strong class="text-blue-300">`callback`</strong> (function): A function that is called when the toggle state changes. It is passed one argument, the new state (`true` or `false`).</li>
+                        <li><strong class="text-blue-300">`tooltip`</strong> (string, optional): A description that appears on hover.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-medium text-lg text-blue-300 mb-2">`Section:CreateSlider(name, min, max, default, rounding, callback, tooltip)`</h3>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li>Creates a slider to select a numerical value.</li>
+                        <li><strong class="text-blue-300">`name`</strong> (string): The text label for the slider.</li>
+                        <li><strong class="text-blue-300">`min`</strong> (number): The minimum value of the slider.</li>
+                        <li><strong class="text-blue-300">`max`</strong> (number): The maximum value of the slider.</li>
+                        <li><strong class="text-blue-300">`default`</strong> (number): The initial value of the slider.</li>
+                        <li><strong class="text-blue-300">`rounding`</strong> (number, optional): The number of decimal places to round to. Default is `0`.</li>
+                        <li><strong class="text-blue-300">`callback`</strong> (function): A function called when the slider value changes. It is passed one argument, the new value.</li>
+                        <li><strong class="text-blue-300">`tooltip`</strong> (string, optional): A description that appears on hover.</li>
+                    </ul>
+                </div>
+                 <div>
+                    <h3 class="font-medium text-lg text-blue-300 mb-2">`Section:CreateLabel(name)`</h3>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li>Creates a non-interactive text label.</li>
+                        <li><strong class="text-blue-300">`name`</strong> (string): The text to display.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-medium text-lg text-blue-300 mb-2">`Section:CreateInput(name, text_filter, default, callback, tooltip)`</h3>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li>Creates a text input box.</li>
+                        <li><strong class="text-blue-300">`name`</strong> (string): The label for the input box.</li>
+                        <li><strong class="text-blue-300">`text_filter`</strong> (string): A text filter for the input.</li>
+                        <li><strong class="text-blue-300">`default`</strong> (string, optional): The initial text in the input box.</li>
+                        <li><strong class="text-blue-300">`callback`</strong> (function): A function called when the input text changes. It is passed one argument, the new text.</li>
+                        <li><strong class="text-blue-300">`tooltip`</strong> (string, optional): A description that appears on hover.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-medium text-lg text-blue-300 mb-2">`Section:CreateDropdown(name, list, default, callback, tooltip)`</h3>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li>Creates a dropdown menu.</li>
+                        <li><strong class="text-blue-300">`name`</strong> (string): The label for the dropdown.</li>
+                        <li><strong class="text-blue-300">`list`</strong> (table): A table of strings for the dropdown options.</li>
+                        <li><strong class="text-blue-300">`default`</strong> (string, optional): The initial value.</li>
+                        <li><strong class="text-blue-300">`callback`</strong> (function): A function called when the selected option changes. It is passed one argument, the new value.</li>
+                        <li><strong class="text-blue-300">`tooltip`</strong> (string, optional): A description that appears on hover.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="text-2xl md:text-3xl font-semibold text-white mb-4 border-b border-gray-700 pb-2">Example Usage</h2>
+            <p class="mb-4 text-gray-300">
+                Here is a full example of how to create a basic UI with a window, a tab, a section, and a button.
+            </p>
+            <pre class="bg-gray-700 rounded-lg p-4 text-sm overflow-x-auto"><code>-- Load the SkyLibrary library
+local SkyLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/yofriendfromschool1/aw-temp-fix/refs/heads/main/skui.lua",true))()
+
+-- Create the main window
+local MyWindow = SkyLibrary.Create("SkyLibrary", true)
+
+-- Create a tab inside the window
+local MainTab = MyWindow:CreateTab("Main Tab")
+
+-- Create a section inside the tab
+local MySection = MainTab:CreateSection("General Settings")
+
+-- Add a button to the section
+MySection:CreateButton(
+    "Click Me!",
+    function()
+        print("Button was clicked!")
+    end,
+    "This button prints a message to the console."
+)
+
+-- Add a toggle switch
+MySection:CreateToggle(
+    "Enable Feature",
+    false,
+    function(state)
+        if state then
+            print("Feature enabled!")
+        else
+            print("Feature disabled.")
+        end
+    end
+)
+
+-- Add a slider
+MySection:CreateSlider(
+    "Set Value",
+    0,
+    100,
+    50,
+    1,
+    function(value)
+        print("Slider value is: " .. value)
+    end
+)
+</code></pre>
+        </section>
+
+    </div>
+
+</body>
+</html>
